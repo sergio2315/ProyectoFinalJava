@@ -8,59 +8,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.proyectofinaljava.R;
+import com.example.proyectofinaljava.databinding.FragmentSecondBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SecondFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SecondFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SecondFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SecondFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SecondFragment newInstance(String param1, String param2) {
-        SecondFragment fragment = new SecondFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentSecondBinding binding;
+    private String name1;
+    private String name2;
+    private String name3;
+    private String name4;
+    private String url;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            name1 = getArguments().getString("name1");
+            name2 = getArguments().getString("name2");
+            name3 = getArguments().getString("name3");
+            name4 = getArguments().getString("name4");
+            url = getArguments().getString("url");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        binding = FragmentSecondBinding.inflate(inflater,container,false);
+        binding.txBuilding.setText(name1);
+        binding.txProyect.setText(name2);
+        binding.txAparment.setText(name3);
+        binding.txAddress.setText(name4);
+        Glide.with(getContext()).load(url).centerCrop().into(binding.deptoImage);
+        return binding.getRoot();
     }
 }
