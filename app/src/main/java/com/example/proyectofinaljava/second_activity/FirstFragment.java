@@ -81,8 +81,6 @@ public class FirstFragment extends Fragment implements AparmentAdapter.SendApart
         bundle.putString("name3", apartment.getUnitId());
         bundle.putString("name4", apartment.getAddress());
         bundle.putString("url", apartment.getUrlImageBuilding());
-        Toast.makeText(getContext(), apartment.getBuildingName(),
-                Toast.LENGTH_SHORT).show();
-       Navigation.findNavController(binding.getRoot()).navigate(R.id.action_firstFragment_to_secondFragment);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_firstFragment_to_secondFragment,bundle);
     }
 }

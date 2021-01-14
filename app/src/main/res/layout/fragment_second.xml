@@ -24,8 +24,9 @@
 
     <ImageView
         android:id="@+id/deptoImage"
-        android:layout_width="352dp"
-        android:layout_height="162dp"
+        android:layout_width="350dp"
+        android:layout_height="138dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
 
     <TextView
         android:id="@+id/txBuilding"
-        android:layout_width="62dp"
+        android:layout_width="wrap_content"
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:text="TextView"
@@ -80,54 +81,17 @@
         app:layout_constraintGuide_begin="205dp"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioButton
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Luces del apartamento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <RadioButton
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="elementos del baño"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn1" />
-
-    <RadioButton
-        android:id="@+id/btn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="Elementos de la cocina"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn2" />
-
-    <RadioButton
-        android:id="@+id/radioButton10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="elementos del dormitorio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn3" />
-
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton10">
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup">
 
         <RadioButton
-            android:id="@+id/radioButton13"
+            android:id="@+id/rdBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -135,14 +99,14 @@
             android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/radioButton12"
+            android:id="@+id/rdBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Estado general de las terminaciones regular"
             android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/radioButton11"
+            android:id="@+id/rdBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Estado general de las terminaciones malas"
@@ -154,12 +118,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Puntaje obtenido"
+        android:text="@string/result"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Button
         android:id="@+id/btnSave"
@@ -175,16 +139,53 @@
         app:layout_constraintTop_toBottomOf="@+id/txResult" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="#E80B0B"
+        android:backgroundTint="#676666"
         android:text="Enviar alerta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txResult" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="264dp"
+        android:layout_height="192dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+        <CheckBox
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Luces del apartamento" />
+
+        <CheckBox
+            android:id="@+id/btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="elementos del baño" />
+
+        <CheckBox
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="Elementos de la cocina" />
+
+        <CheckBox
+            android:id="@+id/btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="elementos del dormitorio" />
+
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

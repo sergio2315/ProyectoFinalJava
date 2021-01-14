@@ -18,11 +18,11 @@ import java.util.List;
 
 public class AparmentAdapter extends RecyclerView.Adapter<AparmentAdapter.aparmentViewHolder>{
     private List<Apartment>apartmentList;
-    private SendApartment listener;
+    private SendApartment sendApartment;
 
     public AparmentAdapter(List<Apartment>apartmentList,SendApartment sendApartment){
         this.apartmentList = apartmentList;
-        this.listener = sendApartment;
+        this.sendApartment= sendApartment;
     }
 
     @NonNull
@@ -65,7 +65,7 @@ public class AparmentAdapter extends RecyclerView.Adapter<AparmentAdapter.aparme
         }
         @Override
         public void onClick(View v) {
-           listener.sendAparment(apartmentList.get(getLayoutPosition()));
+           sendApartment.sendAparment(apartmentList.get(getLayoutPosition()));
         }
     }
     public interface SendApartment {
