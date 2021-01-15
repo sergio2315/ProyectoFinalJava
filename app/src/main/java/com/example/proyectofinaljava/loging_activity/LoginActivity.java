@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     private String password="123Pass";
     private String passScreen;
     private int countPass = 0;
-    private boolean activateIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
