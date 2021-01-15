@@ -8,5 +8,5 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofinaljava.second_activity.SecondActivity;
 
-public class ModelLogin extends AppCompatActivity {
+public class ModelLogin {
 }
