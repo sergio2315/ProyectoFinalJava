@@ -15,40 +15,39 @@ import com.example.proyectofinaljava.second_activity.FirstFragment;
 import com.example.proyectofinaljava.second_activity.SecondActivity;
 import com.example.proyectofinaljava.second_activity.SecondFragment;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements IModelLogin {
     private ActivityLoginBinding binding;
-    private String password="123Pass";
-    private String passScreen;
-    private int countPass = 0;
-    private boolean activateIn;
+    private PresenterLogin presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        presenter = new PresenterLogin(this);
+
         binding.btnIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPassword(password);
+                getPassword();
             }
         });
     }
-    private void makeIntent(){
+    @Override
+    public void messageError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void blockButton(String colorButton) {
+        binding.btnIn.setBackgroundColor(Color.parseColor(colorButton));
+    }
+    public void getPassword(){
+        presenter.savePassword(binding.textPassword.getText().toString());
+        binding.textPassword.setText("");
+    }
+    public void makeIntent(){
         Intent intent1 = new Intent(this, SecondActivity.class);
         startActivity(intent1);
-    }
-    private void checkPassword(String password){
-        passScreen = binding.textPassword.getText().toString();
-        if (passScreen.equals(password)&&countPass<3){
-            makeIntent();
-        }else {
-            countPass += 1;
-            Toast.makeText(this, "Contraseña incorrecta, intento "+countPass, Toast.LENGTH_SHORT).show();
-        }
-        if (countPass>=3){
-            binding.btnIn.setBackgroundColor(Color.parseColor("#676666"));
-            Toast.makeText(this, "Reinicie App para volver a intentarlo", Toast.LENGTH_LONG).show();
-        }
     }
 }
