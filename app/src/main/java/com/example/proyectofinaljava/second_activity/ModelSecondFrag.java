@@ -37,14 +37,13 @@ public class ModelSecondFrag {
 
     public void checkOpcion(boolean btn1,boolean btn2,boolean btn3
             ,boolean btn4,boolean rdBtn1,boolean rdBtn2,boolean rdBtn3) {
-
         if (btn1 == true) {
             pointBtn1 = 10;
         } else {
             pointBtn1 = 0;
         }
         if (btn2 == true) {
-            pointBtn2 = 15;
+            pointBtn2 = 40;
         } else {
             pointBtn2 = 0;
         }
@@ -54,7 +53,7 @@ public class ModelSecondFrag {
             pointBtn3 = 0;
         }
         if (btn4 == true) {
-            pointBtn4 = 100;
+            pointBtn4 = 20;
         } else {
             pointBtn4 = 0;
         }
@@ -71,15 +70,13 @@ public class ModelSecondFrag {
         if (result<130){
             message = "Envie una alerta por bajo puntaje ";
             colorBrutton = "#E80B0B";
-            /*Toast.makeText(getContext(),"Envie una alerta por bajo puntaje ",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#E80B0B"));
-            activeAlert = true;*/
+            activeAlert = true;
+            messageAlert = "Esto es un mensaje de alerta!";
         }else {
             message = "Seleccione guardar";
             colorBrutton = "#676666";
-            /*Toast.makeText(getContext(),"Seleccione guardar",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#676666"));
-            activeAlert = false;*/
+            activeAlert = false;
+            messageAlert = "No puede enviar una alerta";
         }
     }
    /* public void activateAlert(int result){

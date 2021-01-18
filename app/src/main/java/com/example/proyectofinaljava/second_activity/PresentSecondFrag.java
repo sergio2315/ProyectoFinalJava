@@ -15,5 +15,8 @@ public class PresentSecondFrag {
         model.checkOpcion(btn1,btn2,btn3,btn4,rdBtn1,rdBtn2,rdBtn3);
         iSecondFrag.showResult(model.getResult());
         iSecondFrag.activateAlert(model.getMessage(),model.getColorBrutton());
+        if (model.isActiveAlert() == true){
+            iSecondFrag.shareWithWsp(model.getMessageAlert());
+        }
     }
 }

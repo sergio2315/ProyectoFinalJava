@@ -55,18 +55,7 @@ public class SecondFragment extends Fragment implements ISecondFrag{
                 checkOpcion();
             }
         });
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"el puntaje es: "+result,Toast.LENGTH_SHORT).show();
-            }
-        });
-        binding.btnAlert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //sendAlert();
-            }
-        });
+
         binding.txBuilding.setText(name1);
         binding.txProyect.setText(name2);
         binding.txAparment.setText(name3);
@@ -83,44 +72,36 @@ public class SecondFragment extends Fragment implements ISecondFrag{
         boolean btn1 = binding.btn1.isChecked();
         boolean btn2 = binding.btn2.isChecked();
         boolean btn3 = binding.btn3.isChecked();
-        boolean btn4 = binding.btn2.isChecked();
+        boolean btn4 = binding.btn4.isChecked();
         boolean rdBtn1 = binding.rdBtn1.isChecked();
         boolean rdBtn2 = binding.rdBtn2.isChecked();
         boolean rdBtn3 = binding.rdBtn3.isChecked();
         present.saveCheckButton(btn1,btn2,btn3,btn4,rdBtn1,rdBtn2,rdBtn3);
     }
-    /*public void activateAlert(){
-        if (result<130){
-            Toast.makeText(getContext(),"Envie una alerta por bajo puntaje ",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#E80B0B"));
-            activeAlert = true;
-        }else {
-            Toast.makeText(getContext(),"Seleccione guardar",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#676666"));
-            activeAlert = false;
-        }
-    }
-    public void sendAlert(){
-        if (activeAlert==true){
-            shareWithWsp("Esto es un mensaje de alerta!");
-        }else {
-            Toast.makeText(getContext(),"No puede enviar una alerta",Toast.LENGTH_SHORT).show();
-        }
-    }
-    public void shareWithWsp(String message){
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }*/
-
     @Override
     public void showResult(int result) {
         binding.txResult.setText(getString(R.string.result, String.valueOf(result)));
+        binding.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"El puntaje es: "+result,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     public void activateAlert(String message,String colorBtn) {
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
         binding.btnAlert.setBackgroundColor(Color.parseColor(colorBtn));
+    }
+    public void shareWithWsp(String messageAlert){
+        binding.btnAlert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, messageAlert);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
     }
 }
