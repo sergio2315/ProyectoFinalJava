@@ -66,7 +66,6 @@ public class ModelSecondFrag {
             pointRdBtn = 1;
         }
         result = (pointBtn1+pointBtn2+pointBtn3+pointBtn4)*pointRdBtn;
-       // binding.txResult.setText(getString(R.string.result, String.valueOf(result)));
     }
     public void activateAlert(){
         if (result<130){
