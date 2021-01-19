@@ -11,7 +11,13 @@ public class PresentSecondFrag {
         this.model = new ModelSecondFrag();
     }
     public void saveCheckButton(boolean btn1,boolean btn2,boolean btn3
-            ,boolean btn4,boolean rbBtn1,boolean rbBtn2){
+            ,boolean btn4,boolean rdBtn1,boolean rdBtn2,boolean rdBtn3){
+        model.checkOpcion(btn1,btn2,btn3,btn4,rdBtn1,rdBtn2,rdBtn3);
+        iSecondFrag.showResult(model.getResult());
+        iSecondFrag.activateAlert(model.getMessage(),model.getColorBrutton());
+        if (model.getResult() <= 130){
+            iSecondFrag.shareWithWsp(model.getMessageAlert());
 
+        }
     }
 }

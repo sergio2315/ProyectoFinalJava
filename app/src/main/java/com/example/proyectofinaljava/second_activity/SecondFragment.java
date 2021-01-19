@@ -22,24 +22,20 @@ import com.example.proyectofinaljava.R;
 import com.example.proyectofinaljava.databinding.FragmentSecondBinding;
 import com.google.android.material.chip.ChipGroup;
 
-public class SecondFragment extends Fragment {
+public class SecondFragment extends Fragment implements ISecondFrag{
     private FragmentSecondBinding binding;
+    private PresentSecondFrag present;
     private String name1;
     private String name2;
     private String name3;
     private String name4;
     private String url;
-    private int pointBtn1;
-    private int pointBtn2;
-    private int pointBtn3;
-    private int pointBtn4;
-    private int pointRdBtn;
     private int result;
-    private boolean activeAlert;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        present = new PresentSecondFrag(this);
         if (getArguments() != null) {
             name1 = getArguments().getString("name1");
             name2 = getArguments().getString("name2");
@@ -57,21 +53,9 @@ public class SecondFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 checkOpcion();
-                activateAlert();
             }
         });
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"el puntaje es: "+result,Toast.LENGTH_SHORT).show();
-            }
-        });
-        binding.btnAlert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendAlert();
-            }
-        });
+
         binding.txBuilding.setText(name1);
         binding.txProyect.setText(name2);
         binding.txAparment.setText(name3);
@@ -85,58 +69,39 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
     public void checkOpcion(){
-        if (binding.btn1.isChecked()) {
-            pointBtn1 = 10;
-        } else {
-            pointBtn1 = 0;
-        }
-        if (binding.btn2.isChecked()) {
-            pointBtn2 = 40;
-        } else {
-            pointBtn2 = 0;
-        }
-        if (binding.btn3.isChecked()) {
-            pointBtn3 = 30;
-        } else {
-            pointBtn3 = 0;
-        }
-        if (binding.btn4.isChecked()) {
-            pointBtn4 = 20;
-        } else {
-            pointBtn4 = 0;
-        }
-        if (binding.rdBtn1.isChecked()) {
-            pointRdBtn = 3;
-        } else if (binding.rdBtn2.isChecked()){
-            pointRdBtn = 2;
-        }else {
-            pointRdBtn = 1;
-        }
-        result = (pointBtn1+pointBtn2+pointBtn3+pointBtn4)*pointRdBtn;
+        boolean btn1 = binding.btn1.isChecked();
+        boolean btn2 = binding.btn2.isChecked();
+        boolean btn3 = binding.btn3.isChecked();
+        boolean btn4 = binding.btn4.isChecked();
+        boolean rdBtn1 = binding.rdBtn1.isChecked();
+        boolean rdBtn2 = binding.rdBtn2.isChecked();
+        boolean rdBtn3 = binding.rdBtn3.isChecked();
+        present.saveCheckButton(btn1,btn2,btn3,btn4,rdBtn1,rdBtn2,rdBtn3);
+    }
+    @Override
+    public void showResult(int result) {
         binding.txResult.setText(getString(R.string.result, String.valueOf(result)));
+        binding.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"El puntaje es: "+result,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-    public void activateAlert(){
-        if (result<130){
-            Toast.makeText(getContext(),"Envie una alerta por bajo puntaje ",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#E80B0B"));
-            activeAlert = true;
-        }else {
-            Toast.makeText(getContext(),"Seleccione guardar",Toast.LENGTH_SHORT).show();
-            binding.btnAlert.setBackgroundColor(Color.parseColor("#676666"));
-            activeAlert = false;
-        }
+    @Override
+    public void activateAlert(String message,String colorBtn) {
+        Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+        binding.btnAlert.setBackgroundColor(Color.parseColor(colorBtn));
     }
-    public void sendAlert(){
-        if (activeAlert==true){
-            shareWithWsp("Esto es un mensaje de alerta!");
-        }else {
-            Toast.makeText(getContext(),"No puede enviar una alerta",Toast.LENGTH_SHORT).show();
-        }
-    }
-    public void shareWithWsp(String message){
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
+    public void shareWithWsp(String messageAlert){
+        binding.btnAlert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, messageAlert);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
     }
 }
